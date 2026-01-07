@@ -1,12 +1,20 @@
 import express from "express";
+import dotenv from "dotenv";
+dotenv.config();
+import sequelize from "./db";
 
+const app = express();
 
-const expressApp = express();
+const start = async () => {
+    try {
+        await sequelize.authenticate();
+        await sequelize.sync();
+        app.listen(process.env.PORT, () => {
+            console.log("Server is running on port 3000");
+        })
+    }catch (err) {
+        console.log(err);
+    }
+}
 
-expressApp.get("/", (req: express.Request, res: express.Response) => {
-    res.json({message: "hello world"})
-});
-
-expressApp.listen(3000, '0.0.0.0', () => {
-    console.log("Server is running on port 3000");
-})
+start();
