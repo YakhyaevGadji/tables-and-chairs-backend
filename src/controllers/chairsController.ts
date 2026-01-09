@@ -7,7 +7,9 @@ export const getAll = async (
     res: express.Response,
     next: express.NextFunction
 ) => {
-    res.json({message: 'test'});
+    const chairs = await Chairs.findAll();
+
+    res.json(chairs);
 }
 
 export const create = async (
