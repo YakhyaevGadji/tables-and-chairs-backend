@@ -21,14 +21,13 @@ export const create = async (
     next: express.NextFunction
 ) => {
     try {
-        if (!req.files || !req.files.img) {
-            return ApiError.badRequest('Файл не загружен');
+        if (!req.files || !req.files.images) {
+            return next(ApiError.badRequest('Файл не загружен'));
         }
 
-        const img = req.files.img as UploadedFile;
+        const img = req.files.images as UploadedFile;
 
-
-        let fileName = uuid.v4 + ".jpg";
+        const fileName = uuid.v4() + ".jpg";
         await img.mv(path.resolve(__dirname, '..', 'static', fileName));
 
         const chair = await Chairs.create({
@@ -36,10 +35,12 @@ export const create = async (
             images: fileName
         });
 
-        return res.json(chair)
-    }catch (e) {
+        return res.json(chair);
+
+    } catch (e) {
         if (e instanceof Error) {
-            next(ApiError.badRequest(e.message));
+            return next(ApiError.badRequest(e.message));
         }
+        return next(ApiError.badRequest('Неизвестная ошибка'));
     }
 }
