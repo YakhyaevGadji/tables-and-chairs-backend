@@ -22,4 +22,5 @@ jobs:
             cd /var/www/tables-and-chairs-backend
             git pull origin main
             npm install
+            npm run build
             pm2 restart backend
