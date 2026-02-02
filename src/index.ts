@@ -21,12 +21,14 @@ app.get("/", (req: express.Request, res: express.Response) => {
     res.status(200).json({message: 'test'})
 })
 
+const PORT = Number(process.env.PORT) || 3000;
+
 const start = async () => {
     try {
         await sequelize.authenticate();
         await sequelize.sync();
-        app.listen(process.env.PORT, () => {
-            console.log("Server is running http://localhost:3000/api");
+        app.listen(PORT, '0.0.0.0', () => {
+            console.log(`Server is running ${PORT}`);
         })
     }catch (err) {
         console.log(err);

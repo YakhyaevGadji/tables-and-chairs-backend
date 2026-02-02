@@ -1,14 +1,26 @@
 import { Sequelize } from "sequelize";
 
+const {
+  DB_NAME,
+  DB_USER,
+  DB_PASSWORD,
+  DB_HOST,
+  DB_PORT,
+} = process.env;
+
+if (!DB_NAME || !DB_USER || !DB_PASSWORD || !DB_HOST) {
+  throw new Error('Database environment variables are not set');
+}
+
 const sequelize = new Sequelize(
-    process.env.DB_NAME,
-    process.env.DB_USER,
-    process.env.DB_PASSWORD,
-    {
-        dialect: 'postgres',
-        host: process.env.DB_HOST,
-        port: process.env.DB_PORT,
-    }
-)
+  DB_NAME,
+  DB_USER,
+  DB_PASSWORD,
+  {
+    host: DB_HOST,
+    port: Number(DB_PORT) || 5432,
+    dialect: 'postgres',
+  }
+);
 
 export default sequelize;
