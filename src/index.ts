@@ -18,7 +18,7 @@ app.use('/api', router);
 app.use(errorMiddleware);
 
 app.get("/", (req: express.Request, res: express.Response) => {
-    res.status(200).json({message: 'test new test'})
+    res.status(200).json({message: 'test'})
 })
 
 const PORT = Number(process.env.PORT) || 3000;
