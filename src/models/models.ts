@@ -14,7 +14,7 @@ export const Chairs = sequelize.define("chairs", {
     oldPrice: { type: DataTypes.INTEGER },
     inStock: { type: DataTypes.BOOLEAN },
     unitCount: { type: DataTypes.INTEGER },
-    images: { type: DataTypes.JSONB },
+    images: { type: DataTypes.ARRAY(DataTypes.STRING), allowNull: false },
     tags: { type: DataTypes.JSONB },
     attributes: { type: DataTypes.JSONB },
 });
