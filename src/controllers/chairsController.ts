@@ -37,7 +37,7 @@ export const create = async (
             const fileName = uuid.v4() + ".jpg";
             await img.mv(path.resolve(__dirname, '..', 'static', fileName));
 
-            const fileUrl = `${process.env.LOCAL_HOST}/${fileName}`;
+            const fileUrl = `${process.env.LOCAL_URL}/${fileName}`;
             imageUrls.push(fileUrl);
         }
 
