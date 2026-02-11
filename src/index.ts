@@ -28,7 +28,7 @@ const start = async () => {
         await sequelize.authenticate();
         await sequelize.sync();
         app.listen(PORT, '0.0.0.0', () => {
-            console.log(`Server is running ${PORT}`);
+            console.log(`Server is running http://localhost:${PORT}/api`);
         })
     }catch (err) {
         console.log(err);
